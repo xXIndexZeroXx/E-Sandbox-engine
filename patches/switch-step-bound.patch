@@ -1,0 +1,22 @@
+--- a/src/analysis/companion.rs
++++ b/src/analysis/companion.rs
+@@ -1145,14 +1145,13 @@ impl Driver<'_> {
+                         .and_then(|vector| vector.get(rows.clone())),
+                     dt: coefficients.dt(),
+                 })?;
++                // C `swtrunc.c` only lowers `*timeStep` when it is above the bound: a
++                // bound that is not finite (a control that moved by a hair) lowers
++                // nothing, and is no error.
+                 if let Some(bound) = bound {
+-                    if !bound.is_finite() {
+-                        return Err(failure(format!(
+-                            "{}: nonfinite timestep limit",
+-                            device.name()
+-                        )));
++                    if bound.is_finite() {
++                        limit = limit.min(bound);
+                     }
+-                    limit = limit.min(bound);
+                 }
+             }
+         }
