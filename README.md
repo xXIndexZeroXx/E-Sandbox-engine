@@ -4,6 +4,8 @@ The simulation engine of E-Sandbox: [ngspice-rs](https://github.com/michaelnavaz
 (a Rust implementation of ngspice) with a small WebAssembly wrapper, built into two files that a
 web page loads: `engine_bg.wasm` and its loader `engine.js`.
 
+The engine runs inside E-Sandbox, the circuit simulator at **[e-sandboxsim.com](https://e-sandboxsim.com)**.
+
 This folder is complete on its own. Everything that goes into the engine files is here or is
 fetched from a public source at a pinned revision, so anyone can rebuild them, change them, and
 use their own build.
@@ -14,6 +16,7 @@ use their own build.
 |---|---|---|
 | `src/lib.rs` | The wrapper: takes a SPICE deck, runs it, hands the results to JavaScript | BSD-3-Clause (`LICENSE`) |
 | `patches/` | Changes made to ngspice-rs, as patch files | BSD-3-Clause, as ngspice-rs |
+| `THIRD-PARTY-NOTICES.txt` | The notices and licence texts of ngspice-rs and every Rust crate built in | Their own |
 | `fetch-source.mjs` | Fetches ngspice-rs at the pinned revision and applies the patches | BSD-3-Clause (`LICENSE`) |
 | `vendor/ngspice-rs/` (fetched, not committed) | The simulator's source as built | Its own: see below |
 
